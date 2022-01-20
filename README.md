@@ -65,7 +65,7 @@ Give a ⭐️ if this project helped you! -->
 
 ## 📝 License
 
-Copyright © 2021 [Steven Epstein](https://github.com/Epstei46).<br />
+Copyright © 2022 [Steven Epstein](https://github.com/Epstei46).<br />
 This project is [MIT](https://github.com/Epstei46/specialization-capstone-project/blob/main/LICENSE.md) licensed.
 
 ***
