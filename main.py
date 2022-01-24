@@ -16,7 +16,21 @@ df_ds = df.loc[df['Platform'] == 'DS']
 del df
 
 """DATA EXPLORATION"""
-# print(f"-  Table has {df.shape[0]} rows and {df.shape[1]} columns.\n")
+yr_min = df_ps4["Year_of_Release"].min() # Oldest released date for a game on this sytem
+yr_max = df_ps4["Year_of_Release"].max() # Newest released date for a game on this system
+prc_min = df_ps4["Global_Sales"].min() # Lowest sales for a game on this sytem
+prc_max = df_ps4["Global_Sales"].max() # Highest sales for a game on this system
+prc_avg = df_ps4["Global_Sales"].mean().__round__(2) # Average sales for games on this system
+prc_med = df_ps4["Global_Sales"].median() # Median sales for games on this sytem
+prc_sum = df_ps4["Global_Sales"].sum().__round__(2) # Total sales for games on this system
+best_sellers = [name for name in df_ps4.nlargest(5,'Global_Sales')['Name']] # List of strings, top 5 best sellers
+genre_count = df_ps4['Genre'].value_counts().reset_index().values.tolist() # Count of games in each genre
+print(f"<>  PS4: # of games, date range, sales data, best sellers, & genre count:\n\
+    DataFrame has {df_ps4.shape[0]} rows/games and {df_ps4.shape[1]} columns.\n\
+    'Year_of_Release' range from {yr_min} to {yr_max}.\n\
+    'Global_Sales' (in millions) range from {prc_min} to {prc_max} with an average of {prc_avg} and median of {prc_med} and total of {prc_sum}.\n\
+    Best Sellers: {best_sellers}\n\
+    Genre Count: {genre_count}")
 
 # # This creates a list of lists [[list,dtype],[],[]]
 # # columns_list = [[column, df[f"{column}"].dtypes] for column in df.columns]
