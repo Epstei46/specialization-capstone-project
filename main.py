@@ -6,9 +6,6 @@ df = pd.read_csv('Video_Games.csv') # reading the initial data and storing in a 
 """DATA CLEANING"""
 
 
-"""DATA EXPlORATION"""
-# print(df['Platform'].value_counts()) # Most games: DS > PS3 > Wii > X360 > PC > PSP > PS4 > XOne
-
 
 """CREATE SUBSETS"""
 df_ps4 = df.loc[df['Platform'] == 'PS4']
@@ -19,12 +16,18 @@ df_wii = df.loc[df['Platform'] == 'Wii']
 df_pc = df.loc[df['Platform'] == 'PC']
 df_psp = df.loc[df['Platform'] == 'PSP']
 df_ds = df.loc[df['Platform'] == 'DS']
-del df
 
-"""DATA ANALYSIS"""
+
+
+"""DATA EXPlORATION"""
+# print(df['Platform'].value_counts()) # Most games: DS > PS3 > Wii > X360 > PC > PSP > PS4 > XOne
 yr_min = df_ps4["Year_of_Release"].min() # Oldest released date for a game on this sytem
 yr_max = df_ps4["Year_of_Release"].max() # Newest released date for a game on this system
+del df
 
+
+
+"""DATA ANALYSIS"""
 prc_min = df_ps4["Global_Sales"].min() # Lowest sales for a game on this sytem
 prc_max = df_ps4["Global_Sales"].max() # Highest sales for a game on this system
 prc_avg = df_ps4["Global_Sales"].mean().__round__(3) # Average sales for games on this system
