@@ -1,29 +1,35 @@
 <h1 align="center">Welcome to Video Game Market Analysis 👋</h1>
 <p>
   <img alt="Version" src="https://img.shields.io/badge/version-1.0.0-blue.svg?cacheSeconds=2592000" />
-  <a href="https://github.com/Epstei46/foundations-capstone-project#readme" target="_blank">
+  <a href="https://github.com/Epstei46/specialization-capstone-project#readme" target="_blank">
     <img alt="Documentation" src="https://img.shields.io/badge/documentation-yes-brightgreen.svg" />
   </a>
-  <a href="https://github.com/Epstei46/foundations-capstone-project/graphs/commit-activity" target="_blank">
+  <a href="https://github.com/Epstei46/specialization-capstone-project/graphs/commit-activity" target="_blank">
     <img alt="Maintenance" src="https://img.shields.io/badge/Maintained%3F-no%3F-yellow.svg" />
   </a>
   <a href="https://github.com/Epstei46/specialization-capstone-project/blob/main/LICENSE.md" target="_blank">
     <img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-green.svg" />
-    <!-- <img alt="License:MIT" src="https://img.shields.io/github/license/Epstei46/foundations-capstone-project" /> -->
+    <!-- <img alt="License:MIT" src="https://img.shields.io/github/license/Epstei46/specialization-capstone-project" /> -->
   </a>
 </p>
 
-## Description
+# Video Game Market Analysis
 
-> Video Game Market Analysis is a project I started to get a better understanding of the amount of games and/or total sales, per recent system, for each genre. After cleaning this data, I will make use of Python modules to create bar charts which I will display in this repo. However, the most recent data I could find sourced VGChartz, and only up to 2016-2017.
+This is a project I started to get a better understanding of the amount of games and/or total sales, per recent system, for each genre. After exploring and cleaning this data, I will do some analysis and make use of Python modules to create bar charts which I will display in this repo.
 
+## About the Data
+
+The data set used in this project was created early January 2022 and downloaded from [data.world]<https://data.world/sumitrock/video/>, which sourced the data from [VGChartz]<https://www.vgchartz.com/gamedb/>.
+> There is only 3 games from 2017 and 1 game from 2020, so I will be focusing on data from 2016 and earlier.
+
+VGChartz also has additional data on [total platform sales]<https://www.vgchartz.com/analysis/platform_totals/>, but this was not included in the data set.
 
 ## MVP
 
 * As a user, I should be able to select a genre and see which system had the largest number of games.
 * As a user, I should be able to select a genre and see which system had the highest sales.
 
-## Additional Features
+<!-- ## Additional Features -->
 
 <!-- * Along with the title of show/movie, added an input field to the form for an optional comment.
 * Changed pixel width/height to view width/height to look better on mobile.
