@@ -23,8 +23,26 @@ df_ds = df.loc[df['Platform'] == 'DS']
 """DATA EXPlORATION"""
 # print(df['Platform'].value_counts()) # Most games: DS > PS3 > Wii > X360 > PC > PSP > PS4 > XOne
 ps4_yr_min, ps4_yr_max = fn.year_range(df_ps4,"Year_of_Release")
+xone_yr_min, xone_yr_max = fn.year_range(df_xone,"Year_of_Release")
+ps3_yr_min, ps3_yr_max = fn.year_range(df_ps3,"Year_of_Release")
+x360_yr_min, x360_yr_max = fn.year_range(df_x360,"Year_of_Release")
+wii_yr_min, wii_yr_max = fn.year_range(df_wii,"Year_of_Release")
+ds_yr_min, ds_yr_max = fn.year_range(df_ds,"Year_of_Release")
+psp_yr_min, psp_yr_max = fn.year_range(df_psp,"Year_of_Release")
+pc_yr_min, pc_yr_max = fn.year_range(df_pc,"Year_of_Release")
 del df
-print(f"PS4 'Year_of_Release' range from {ps4_yr_min} to {ps4_yr_max}.")
+
+print(f"<>  Date range by system for games released:\n\
+    PS4 'Year_of_Release' range from {ps4_yr_min} to {ps4_yr_max}.\n\
+    Xbox One 'Year_of_Release' range from {xone_yr_min} to {xone_yr_max}.\n\
+    PS3 'Year_of_Release' range from {ps3_yr_min} to {ps3_yr_max}.\n\
+    Xbox 360 'Year_of_Release' range from {x360_yr_min} to {x360_yr_max}.\n\
+    Wii 'Year_of_Release' range from {wii_yr_min} to {wii_yr_max}.\n\
+    DS 'Year_of_Release' range from {ds_yr_min} to {ds_yr_max}.\n\
+    PSP 'Year_of_Release' range from {psp_yr_min} to {psp_yr_max}.\n\
+    PC 'Year_of_Release' range from {pc_yr_min} to {pc_yr_max}.\n"
+)
+# Found outliers with DS & PC, going back to 1985. May want to remove some of those rows.
 
 
 
