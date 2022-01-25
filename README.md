@@ -32,7 +32,7 @@ VGChartz also has additional data on [total platform sales](https://www.vgchartz
 The data dictionary included in the data set only showed data types; the descriptions I added after exploring the dataset and source website (VGChartz).
 
 | Column | Data Type | Description |
-|-------|--------------------------|
+|--------|-----------|-------------|
 | name | string | name of the game |
 | platform | string | platform  the game was released on (i.e. PS4, XOne, etc.) |
 | year_of_release | integer | year the game was released |
