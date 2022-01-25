@@ -27,6 +27,29 @@ If you would like to learn more about how the data was scraped or try it yoursel
 
 VGChartz also has additional data on [total platform sales](https://www.vgchartz.com/analysis/platform_totals/). This was not included in the data set but is worth taking note of.
 
+## Data Dictionary
+
+The data dictionary included in the data set only showed data types; the descriptions I added after exploring the dataset and source website (VGChartz).
+
+| Column | Data Type | Description |
+|-------|--------------------------|
+| name | string | name of the game |
+| platform | string | platform  the game was released on (i.e. PS4, XOne, etc.) |
+| year_of_release | integer | year the game was released |
+| genre | string | genre of the game |
+| publisher | string | publisher of the game |
+| na_sales | decimal | sales in North America (in millions) |
+| eu_sales | decimal | sales in Europe (in millions) |
+| jp_sales | decimal | sales in Japan (in millions) |
+| other_sales | decimal | sales in the rest of the world (in millions) |
+| global_sales | decimal | sales throughout the world (in millions) |
+| critic_score | integer | average critic score, out of 100 |
+| critic_count | integer | total number of critics who provided a score |
+| user_score | string | average user score from VGChartz, out of 10 |
+| user_count | integer | total number of users who provided a score |
+| developer | string | developer of the game |
+| rating | string | rating of the game (i.e. E, E10+, T, M, etc.) |
+
 ## MVP
 
 * As a user, I should be able to select a genre and see which system had the largest number of games.
