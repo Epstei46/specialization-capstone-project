@@ -1,9 +1,16 @@
 import numpy as np
 import pandas as pd
 
-"""CREATE SUBSETS"""
-df = pd.read_csv('Video_Games.csv')
+df = pd.read_csv('Video_Games.csv') # reading the initial data and storing in a dataFrame
+
+"""DATA CLEANING"""
+
+
+"""DATA EXPlORATION"""
 # print(df['Platform'].value_counts()) # Most games: DS > PS3 > Wii > X360 > PC > PSP > PS4 > XOne
+
+
+"""CREATE SUBSETS"""
 df_ps4 = df.loc[df['Platform'] == 'PS4']
 df_xone = df.loc[df['Platform'] == 'XOne']
 df_ps3 = df.loc[df['Platform'] == 'PS3']
@@ -14,7 +21,7 @@ df_psp = df.loc[df['Platform'] == 'PSP']
 df_ds = df.loc[df['Platform'] == 'DS']
 del df
 
-"""DATA EXPLORATION"""
+"""DATA ANALYSIS"""
 yr_min = df_ps4["Year_of_Release"].min() # Oldest released date for a game on this sytem
 yr_max = df_ps4["Year_of_Release"].max() # Newest released date for a game on this system
 
@@ -35,9 +42,10 @@ print(f"<>  PS4: # of games, date range, sales data, best sellers, & genre count
     'Year_of_Release' range from {yr_min} to {yr_max}.\n\
     'Global_Sales' (in millions) range from {prc_min} to {prc_max} with an average of {prc_avg} and median of {prc_med} and total of {prc_sum}.\n\
     Best Sellers: {best_sellers}.\n\
-    Genre_Sales: {genre_by_sales}.")
+    Genre_Sales ordered by count [[genre, games_count, sales_sum, mean, median, max, min], [...]]:\n{genre_by_count.reset_index().values.tolist()}." # convert DataFrame to list of lists for each genre
+)
 # Genre Count: {genre_count}.\n\ # removed series, included in dataFrame instead
-# Genre_Sales [[genre, games_count, sales_sum, mean, median, max, min], [...]]:\n{genre_by_sales.reset_index().values.tolist()} # convert DataFrame to list of lists for each genre
+# Genre_Sales ordered by count [[genre, games_count, sales_sum, mean, median, max, min], [...]]:\n{genre_by_sales.reset_index().values.tolist()} # convert DataFrame to list of lists for each genre
 
 # # This creates a list of lists [[list,dtype],[],[]]
 # # columns_list = [[column, df[f"{column}"].dtypes] for column in df.columns]
