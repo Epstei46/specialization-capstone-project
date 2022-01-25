@@ -1,5 +1,6 @@
 import numpy as np
 import pandas as pd
+import functions as fn
 
 df = pd.read_csv('Video_Games.csv') # reading the initial data and storing in a dataFrame
 
@@ -21,9 +22,9 @@ df_ds = df.loc[df['Platform'] == 'DS']
 
 """DATA EXPlORATION"""
 # print(df['Platform'].value_counts()) # Most games: DS > PS3 > Wii > X360 > PC > PSP > PS4 > XOne
-yr_min = df_ps4["Year_of_Release"].min() # Oldest released date for a game on this sytem
-yr_max = df_ps4["Year_of_Release"].max() # Newest released date for a game on this system
+ps4_yr_min, ps4_yr_max = fn.year_range(df_ps4,"Year_of_Release")
 del df
+print(f"PS4 'Year_of_Release' range from {ps4_yr_min} to {ps4_yr_max}.")
 
 
 
@@ -40,13 +41,14 @@ best_sellers = [name for name in df_ps4.nlargest(5,"Global_Sales")["Name"]] # Li
 genre_by_count = df_ps4.groupby(["Genre"]).agg({"Genre":"count", "Global_Sales":["sum","mean","median","max","min"]}).round(3).sort_values(by=[("Genre","count")], inplace=False, ascending=False)
 genre_by_sales = genre_by_count.sort_values(by=[("Global_Sales","mean")], inplace=False, ascending=False) # mean or median makes the most sense because count varies
 
-print(f"<>  PS4: # of games, date range, sales data, best sellers, & genre count:\n\
-    DataFrame has {df_ps4.shape[0]} rows/games and {df_ps4.shape[1]} columns.\n\
-    'Year_of_Release' range from {yr_min} to {yr_max}.\n\
-    'Global_Sales' (in millions) range from {prc_min} to {prc_max} with an average of {prc_avg} and median of {prc_med} and total of {prc_sum}.\n\
-    Best Sellers: {best_sellers}.\n\
-    Genre_Sales ordered by count [[genre, games_count, sales_sum, mean, median, max, min], [...]]:\n{genre_by_count.reset_index().values.tolist()}." # convert DataFrame to list of lists for each genre
-)
+# NOTE below is a print statement to help visualize the above data analysis.
+# print(f"<>  PS4: # of games, date range, sales data, best sellers, & genre count:\n\
+#     DataFrame has {df_ps4.shape[0]} rows/games and {df_ps4.shape[1]} columns.\n\
+#     'Year_of_Release' range from {ps4_yr_min} to {ps4_yr_max}.\n\
+#     'Global_Sales' (in millions) range from {prc_min} to {prc_max} with an average of {prc_avg} and median of {prc_med} and total of {prc_sum}.\n\
+#     Best Sellers: {best_sellers}.\n\
+#     Genre_Sales ordered by count [[genre, games_count, sales_sum, mean, median, max, min], [...]]:\n{genre_by_count.reset_index().values.tolist()}." # convert DataFrame to list of lists for each genre
+# )
 # Genre Count: {genre_count}.\n\ # removed series, included in dataFrame instead
 # Genre_Sales ordered by count [[genre, games_count, sales_sum, mean, median, max, min], [...]]:\n{genre_by_sales.reset_index().values.tolist()} # convert DataFrame to list of lists for each genre
 
