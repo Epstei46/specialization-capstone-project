@@ -19,10 +19,10 @@ This is a project I started to get a better understanding of the amount of games
 
 ## About the Data
 
-The data set used in this project was created early January 2022 and downloaded from [data.world]<https://data.world/sumitrock/video/>, which sourced the data from [VGChartz]<https://www.vgchartz.com/gamedb/>.
+The data set used in this project was created early January 2022 and downloaded from [data.world](https://data.world/sumitrock/video/), which sourced the data from [VGChartz](https://www.vgchartz.com/gamedb/).
 > There is only 3 games from 2017 and 1 game from 2020, so I will be focusing on data from 2016 and earlier.
 
-VGChartz also has additional data on [total platform sales]<https://www.vgchartz.com/analysis/platform_totals/>, but this was not included in the data set.
+VGChartz also has additional data on [total platform sales](https://www.vgchartz.com/analysis/platform_totals/), but this was not included in the data set.
 
 ## MVP
 
