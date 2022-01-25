@@ -19,8 +19,8 @@ This is a project I started to get a better understanding of the amount of games
 
 ## About the Data
 
-The data set used in this project was created early January 2022 and downloaded from [data.world](https://data.world/sumitrock/video/), which scraped the data from [VGChartz](https://www.vgchartz.com/gamedb/).
-> There is only 3 games from 2017 and 1 game from 2020, so I will be focusing on data from 2016 and earlier.
+The data set used in this project was created early January 2022 and downloaded as a .csv file from [data.world](https://data.world/sumitrock/video/), which scraped the data from [VGChartz](https://www.vgchartz.com/gamedb/). If you would like to know more about [VGChartz Data Collection Methodology](https://www.vgchartz.com/methodology.php).
+> Main point from their methodology page is that they stopped tracking sales data in 2018 but still have the legacy data available for those who are interested in browsing it. There is only 3 games from 2017 and 1 game from 2020 in the data set, so I will be focusing on data from 2016 and earlier.
 
 If you would like to learn more about how the data was scraped or try it yourself, you may be able to gain some insight by viewing [this GitHub repository](https://github.com/ashaheedq/vgchartzScrape). However, data scraping was outside of the scope of this project, so the data set from data.world was used for this analysis.
 > The creator of this GitHub repo is unrelated to the creator of the dataset on data.world, but there are 61 forks linked to this GitHub repo. It is possible that the data set came from one of those forks.
