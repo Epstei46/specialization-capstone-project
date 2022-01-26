@@ -19,7 +19,7 @@ This is a project I started to get a better understanding of the amount of games
 
 ## About the Data
 
-The data set used in this project was created early January 2022 and downloaded as a .csv file from [data.world](https://data.world/sumitrock/video/), which scraped the data from [VGChartz](https://www.vgchartz.com/gamedb/). If you would like to know more about [VGChartz Data Collection Methodology](https://www.vgchartz.com/methodology.php).
+The data set used in this project was created early January 2022 and downloaded as a .csv file from [data.world](https://data.world/sumitrock/video/), which scraped the data from [VGChartz](https://www.vgchartz.com/gamedb/). I have created a [Data Dictionary](#data-dict) below, providing info on each column in the data set. And if you would like to know more about [VGChartz Data Collection Methodology](https://www.vgchartz.com/methodology.php), they have a short post about it.
 > Main point from their methodology page is that they stopped tracking sales data in 2018 but still have the legacy data available for those who are interested in browsing it. There is only 3 games from 2017 and 1 game from 2020 in the data set, so I will be focusing on data from 2016 and earlier.
 
 If you would like to learn more about how the data was scraped or try it yourself, you may be able to gain some insight by viewing [this GitHub repository](https://github.com/ashaheedq/vgchartzScrape). However, data scraping was outside of the scope of this project, so the data set from data.world was used for this analysis.
@@ -27,12 +27,12 @@ If you would like to learn more about how the data was scraped or try it yoursel
 
 VGChartz also has additional data on [total platform sales](https://www.vgchartz.com/analysis/platform_totals/). This was not included in the data set but is worth taking note of.
 
-## Data Dictionary
+## Data Dictionary {#data-dict}
 
 The data dictionary included in the data set only showed data types; the descriptions I added after exploring the dataset and source website (VGChartz).
 
 | Column | Data Type | Description |
-|--------|-----------|-------------|
+|--------|:---------:|-------------|
 | name | string | name of the game |
 | platform | string | platform  the game was released on (i.e. PS4, XOne, etc.) |
 | year_of_release | integer | year the game was released |
@@ -45,10 +45,12 @@ The data dictionary included in the data set only showed data types; the descrip
 | global_sales | decimal | sales throughout the world (in millions) |
 | critic_score | integer | average critic score, out of 100 |
 | critic_count | integer | total number of critics who provided a score |
-| user_score | string | average user score from VGChartz, out of 10 |
+| user_score | string[^1] | average user score from VGChartz, out of 10 |
 | user_count | integer | total number of users who provided a score |
 | developer | string | developer of the game |
 | rating | string | rating of the game (i.e. E, E10+, T, M, etc.) |
+
+[^1]: user_score values are decimals, 'tbd', or empty. If 'tbd' is converted to empty/NaN, then the data type could be decimal. If multiplied by 10, then the data type could be integer and comparable to critic_score.
 
 ## MVP
 
