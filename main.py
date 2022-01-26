@@ -23,6 +23,7 @@ del df
 
 """DATA EXPlORATION"""
 # print(df['Platform'].value_counts()) # Most games: DS > PS3 > Wii > X360 > PC > PSP > PS4 > XOne
+
 ps4_yr_min, ps4_yr_max = fn.year_range(df_ps4,"Year_of_Release") # 2013-2017
 xone_yr_min, xone_yr_max = fn.year_range(df_xone,"Year_of_Release") # 2013-2016
 ps3_yr_min, ps3_yr_max = fn.year_range(df_ps3,"Year_of_Release") # 2006-2016
@@ -32,8 +33,7 @@ ds_yr_min, ds_yr_max = fn.year_range(df_ds,"Year_of_Release") #1985-2020 OR 2004
 psp_yr_min, psp_yr_max = fn.year_range(df_psp,"Year_of_Release") # 2004-2015
 pc_yr_min, pc_yr_max = fn.year_range(df_pc,"Year_of_Release") # 1985-2016
 # NOTE: Data Cleaning: PS4 (1 game from 2017), DS (1 game from 2020 & 1 game from 1985), PC (has an advantage based on year range for games released)
-
-print(f"<>  Date range by system for games released:\n\
+year_comparisons = f"<>  Date range by system for games released:\n\
     PS4 'Year_of_Release' range from {ps4_yr_min} to {ps4_yr_max}.\n\
     Xbox One 'Year_of_Release' range from {xone_yr_min} to {xone_yr_max}.\n\
     PS3 'Year_of_Release' range from {ps3_yr_min} to {ps3_yr_max}.\n\
@@ -42,16 +42,40 @@ print(f"<>  Date range by system for games released:\n\
     DS 'Year_of_Release' range from {ds_yr_min} to {ds_yr_max}.\n\
     PSP 'Year_of_Release' range from {psp_yr_min} to {psp_yr_max}.\n\
     PC 'Year_of_Release' range from {pc_yr_min} to {pc_yr_max}.\n"
-)
+# print(year_comparisons)
+
+ps4_sum, ps4_min, ps4_max, ps4_avg, ps4_med, ps4_mode = fn.aggregator(df_ps4, "Global_Sales")
+xone_sum, xone_min, xone_max, xone_avg, xone_med, xone_mode = fn.aggregator(df_xone, "Global_Sales")
+ps3_sum, ps3_min, ps3_max, ps3_avg, ps3_med, ps3_mode = fn.aggregator(df_ps3, "Global_Sales")
+x360_sum, x360_min, x360_max, x360_avg, x360_med, x360_mode = fn.aggregator(df_x360, "Global_Sales")
+wii_sum, wii_min, wii_max, wii_avg, wii_med, wii_mode = fn.aggregator(df_wii, "Global_Sales")
+ds_sum, ds_min, ds_max, ds_avg, ds_med, ds_mode = fn.aggregator(df_ds, "Global_Sales")
+psp_sum, psp_min, psp_max, psp_avg, psp_med, psp_mode = fn.aggregator(df_psp, "Global_Sales")
+pc_sum, pc_min, pc_max, pc_avg, pc_med, pc_mode = fn.aggregator(df_pc, "Global_Sales")
+# NOTE  Total Sales for PS4, PC, PSP around #300m; Xbox One total sales at $162m.
+#       Total Sales for PS3, Xbox 360, Wii, DS closer oto 900m
+aggregate_comparisons = f"<>  Aggregates by system for games sold ($ in millions):\n\
+    PS4: Total Sales ${ps4_sum} | Lowest Value ${ps4_min} | Highest Value ${ps4_max} | Average ${ps4_avg} | Median ${ps4_med} | Mode ${ps4_mode.loc[0]}.\n\
+    Xbox One: Total Sales ${xone_sum} | Lowest Value ${xone_min} | Highest Value ${xone_max} | Average ${xone_avg} | Median ${xone_med} | Mode ${xone_mode.loc[0]}.\n\
+    PS3: Total Sales ${ps3_sum} | Lowest Value ${ps3_min} | Highest Value ${ps3_max} | Average ${ps3_avg} | Median ${ps3_med} | Mode ${ps3_mode.loc[0]}.\n\
+    Xbox 360: Total Sales ${x360_sum} | Lowest Value ${x360_min} | Highest Value ${x360_max} | Average ${x360_avg} | Median ${x360_med} | Mode ${x360_mode.loc[0]}.\n\
+    Wii: Total Sales ${wii_sum} | Lowest Value ${wii_min} | Highest Value ${wii_max} | Average ${wii_avg} | Median ${wii_med} | Mode ${wii_mode.loc[0]}.\n\
+    DS: Total Sales ${ds_sum} | Lowest Value ${ds_min} | Highest Value ${ds_max} | Average ${ds_avg} | Median ${ds_med} | Mode ${ds_mode.loc[0]}.\n\
+    PSP: Total Sales ${psp_sum} | Lowest Value ${psp_min} | Highest Value ${psp_max} | Average ${psp_avg} | Median ${psp_med} | Mode ${psp_mode.loc[0]}.\n\
+    PC: Total Sales ${pc_sum} | Lowest Value ${pc_min} | Highest Value ${pc_max} | Average ${pc_avg} | Median ${pc_med} | Mode ${pc_mode.loc[0]}.\n"
+# print(aggregate_comparisons)
 
 
 
 """DATA ANALYSIS"""
-prc_min = df_ps4["Global_Sales"].min() # Lowest sales for a game on this sytem
-prc_max = df_ps4["Global_Sales"].max() # Highest sales for a game on this system
-prc_avg = df_ps4["Global_Sales"].mean().__round__(3) # Average sales for games on this system
-prc_med = df_ps4["Global_Sales"].median() # Median sales for games on this sytem
-prc_sum = df_ps4["Global_Sales"].sum().__round__(3) # Total sales for games on this system
+def new_func(df_ps4):
+    prc_min = df_ps4["Global_Sales"].min() # Lowest sales for a game on this sytem
+    prc_max = df_ps4["Global_Sales"].max() # Highest sales for a game on this system
+    prc_avg = df_ps4["Global_Sales"].mean().__round__(3) # Average sales for games on this system
+    prc_med = df_ps4["Global_Sales"].median() # Median sales for games on this sytem
+    prc_sum = df_ps4["Global_Sales"].sum().__round__(3) # Total sales for games on this system
+
+new_func(df_ps4)
 
 best_sellers = [name for name in df_ps4.nlargest(5,"Global_Sales")["Name"]] # List of strings, top 5 best sellers
 
