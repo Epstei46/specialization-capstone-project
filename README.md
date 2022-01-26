@@ -52,10 +52,21 @@ The data dictionary included in the data set only showed data types; the descrip
 
 [^1]: user_score values are decimals, 'tbd', or empty. If 'tbd' is converted to empty/NaN, then the data type could be decimal. If multiplied by 10, then the data type could be integer and comparable to critic_score.
 
-## MVP
+## To Do List
+
+
+- [ ] Finish exploring data. Do any necessary data cleaning and make note of what was done.
+- [ ] Wrangle the data to compare by platform (Xbox One vs PS4) by genre, which have the highest count of games and/or sum of sales.
+- [ ] Do some statistical analysis & create bar charts to show those differences (which system had the largest number of games and highest sales, total and per genre).
+- [ ] Discuss project findings: hypothesis test results, insights/conclusions, potential shortfalls of models/insights, potential next steps, etc.
+- [ ] Bonus -- Can consider including other systems in the analysis, but would need to explain why.
+- [ ] Bonus -- Can see if any more code can be re-written as a function, add additional comments explaining code, and/or create Jupyter Notebook file(s), combining Markdown & Python & the charts all in one place.
+- [ ] When finished with everything else, review and finalize this file.
+
+<!-- ## MVP
 
 * As a user, I should be able to select a genre and see which system had the largest number of games.
-* As a user, I should be able to select a genre and see which system had the highest sales.
+* As a user, I should be able to select a genre and see which system had the highest sales. -->
 
 <!-- ## Additional Features -->
 
