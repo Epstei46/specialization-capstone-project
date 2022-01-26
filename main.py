@@ -44,6 +44,26 @@ year_comparisons = f"<>  Date range by system for games released:\n\
     PC 'Year_of_Release' range from {pc_yr_min} to {pc_yr_max}.\n"
 # print(year_comparisons)
 
+ps4_genre_counts = fn.counter(df_ps4, "Genre")
+xone_genre_counts = fn.counter(df_xone, "Genre")
+ps3_genre_counts = fn.counter(df_ps3, "Genre")
+x360_genre_counts = fn.counter(df_x360, "Genre")
+wii_genre_counts = fn.counter(df_wii, "Genre")
+ds_genre_counts = fn.counter(df_ds, "Genre")
+psp_genre_counts = fn.counter(df_psp, "Genre")
+pc_genre_counts = fn.counter(df_pc, "Genre")
+# NOTE: Xbox One only has 253 games and PS4 has 400 games. All other systems have ~1000 or more games.
+genre_count_comparisons = f"<>  Genre count by console, most to least:\n\
+    PS4 genre counts: {ps4_genre_counts}.\n\
+    Xbox One genre counts: {xone_genre_counts}.\n\
+    PS3 genre counts: {ps3_genre_counts}.\n\
+    Xbox 360 genre counts: {x360_genre_counts}.\n\
+    Wii genre counts: {wii_genre_counts}.\n\
+    DS genre counts: {ds_genre_counts}.\n\
+    PSP genre counts: {psp_genre_counts}.\n\
+    PC genre counts: {pc_genre_counts}\n"
+# print(genre_count_comparisons)
+
 ps4_sum, ps4_min, ps4_max, ps4_avg, ps4_med, ps4_mode = fn.aggregator(df_ps4, "Global_Sales")
 xone_sum, xone_min, xone_max, xone_avg, xone_med, xone_mode = fn.aggregator(df_xone, "Global_Sales")
 ps3_sum, ps3_min, ps3_max, ps3_avg, ps3_med, ps3_mode = fn.aggregator(df_ps3, "Global_Sales")
@@ -68,15 +88,6 @@ aggregate_comparisons = f"<>  Aggregates by system for games sold ($ in millions
 
 
 """DATA ANALYSIS"""
-def new_func(df_ps4):
-    prc_min = df_ps4["Global_Sales"].min() # Lowest sales for a game on this sytem
-    prc_max = df_ps4["Global_Sales"].max() # Highest sales for a game on this system
-    prc_avg = df_ps4["Global_Sales"].mean().__round__(3) # Average sales for games on this system
-    prc_med = df_ps4["Global_Sales"].median() # Median sales for games on this sytem
-    prc_sum = df_ps4["Global_Sales"].sum().__round__(3) # Total sales for games on this system
-
-new_func(df_ps4)
-
 best_sellers = [name for name in df_ps4.nlargest(5,"Global_Sales")["Name"]] # List of strings, top 5 best sellers
 
 # genre_count = df_ps4["Genre"].value_counts().reset_index().values.tolist() # Count of games in each genre. Removed series, included in below dataFrame instead.
@@ -87,7 +98,7 @@ genre_by_sales = genre_by_count.sort_values(by=[("Global_Sales","mean")], inplac
 # print(f"<>  PS4: # of games, date range, sales data, best sellers, & genre count:\n\
 #     DataFrame has {df_ps4.shape[0]} rows/games and {df_ps4.shape[1]} columns.\n\
 #     'Year_of_Release' range from {ps4_yr_min} to {ps4_yr_max}.\n\
-#     'Global_Sales' (in millions) range from {prc_min} to {prc_max} with an average of {prc_avg} and median of {prc_med} and total of {prc_sum}.\n\
+#     'Global_Sales' (in millions) range from {ps4_min} to {ps4_max} with an average of {ps4_avg} and median of {ps4_med} and total of {ps4_sum}.\n\
 #     Best Sellers: {best_sellers}.\n\
 #     Genre_Sales ordered by count [[genre, games_count, sales_sum, mean, median, max, min], [...]]:\n{genre_by_count.reset_index().values.tolist()}." # convert DataFrame to list of lists for each genre
 # )

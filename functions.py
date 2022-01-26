@@ -1,3 +1,6 @@
+# NOTE: this file was imported with the following statement -- import functions as fn
+#       so to use functions in this file, they need to be preceded with fn. Ex: fn.year_range(df,'Year')
+
 def year_range(df, yr_column_name):
     """
         Return the oldest and most recent year (yr) that a game was released
@@ -11,7 +14,7 @@ def year_range(df, yr_column_name):
 
         Returns
         -------
-        list
+        list of floats
             [yr_min, yr_max]
         
         Usage / Example
@@ -21,6 +24,43 @@ def year_range(df, yr_column_name):
     yr_min = df[f"{yr_column_name}"].min() # Oldest released date for a game on this sytem
     yr_max = df[f"{yr_column_name}"].max() # Newest released date for a game on this system
     return [yr_min, yr_max]
+
+def counter(df, column, ascending = False, total = True):
+    """
+        Return a list of lists ordered by the total count of each unique value in the column.
+        
+        Parameters
+        ----------
+        df : pandas object
+            dataFrame from which to pull the values
+        column : string
+            column to focus on for looking for values
+        ascending : bool, default False
+            Order by Descending if False (default), Ascending if True
+        total : bool, default True
+            if True, insert ["Total_Count", integer] to the beginning of the list of lists
+        
+        Returns
+        -------
+        list of lists
+            e.g. [[unique_value, integer_count], [unique_value, integer_count], etc]
+        
+        Usage / Example
+        ---------------
+            genre_counts_asc = fn.counter(df, "Genre", ascending=True)
+            genre_counts_desc = fn.counter(df, "Genre")
+    """
+    count_series = df[f"{column}"].value_counts()
+    if ascending == False:
+        count_list = count_series.reset_index().values.tolist()
+    else:
+        count_series.sort_values(inplace=True, ascending=True)
+        count_list = count_series.reset_index().values.tolist()
+    if total == True:
+        count_list.insert(0,["Total_Count", df.shape[0]])
+    else:
+        pass
+    return count_list
 
 def aggregator(df, column):
     """
@@ -35,7 +75,7 @@ def aggregator(df, column):
         
         Returns
         -------
-        list
+        list of floats
             [summ, minn, maxx, avg, med, mode]
         
         Usage / Example
