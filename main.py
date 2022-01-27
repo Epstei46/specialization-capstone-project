@@ -21,9 +21,24 @@ del df
 
 
 
-"""DATA EXPlORATION"""
+"""DATA EXPLORATION"""
+# print(f"DataFrame df_ps4 has {df_ps4.shape[0]} rows/games and {df_ps4.shape[1]} columns.\n")
+
+# This creates a list of lists [[list,dtype],[],[]]
+columns_list = [[column, df_ps4[f"{column}"].dtypes] for column in df_ps4.columns]
+# print(f"<>  The table includes the following [[columns, data_types], ...] ('O'==Object, likely a string):\n{columns_list}.\n")
+
+genre_count = df_ps4["Genre"].value_counts().reset_index().values.tolist() # Ordered (DESC) count of games in each genre. Converted pandas.Series to list.
+# print(f"Genre Count: {genre_count}.\n")
+
+best_sellers = [name for name in df_ps4.nlargest(5,"Global_Sales")["Name"]] # List of strings, top 5 best sellers
+# print(f"Best Sellers: {best_sellers}.\n")
+
 # print(df['Platform'].value_counts()) # Most games: DS > PS3 > Wii > X360 > PC > PSP > PS4 > XOne
 
+
+
+"""DATA ANALYSIS"""
 ps4_yr_min, ps4_yr_max = fn.year_range(df_ps4,"Year_of_Release") # 2013-2017
 xone_yr_min, xone_yr_max = fn.year_range(df_xone,"Year_of_Release") # 2013-2016
 ps3_yr_min, ps3_yr_max = fn.year_range(df_ps3,"Year_of_Release") # 2006-2016
@@ -85,36 +100,7 @@ aggregate_comparisons = f"<>  Aggregates by system for games sold ($ in millions
     PC: Total Sales ${pc_sum} | Lowest Value ${pc_min} | Highest Value ${pc_max} | Average ${pc_avg} | Median ${pc_med} | Mode ${pc_mode.loc[0]}.\n"
 # print(aggregate_comparisons)
 
-
-
-"""DATA ANALYSIS"""
-best_sellers = [name for name in df_ps4.nlargest(5,"Global_Sales")["Name"]] # List of strings, top 5 best sellers
-
-# genre_count = df_ps4["Genre"].value_counts().reset_index().values.tolist() # Count of games in each genre. Removed series, included in below dataFrame instead.
 genre_by_count = df_ps4.groupby(["Genre"]).agg({"Genre":"count", "Global_Sales":["sum","mean","median","max","min"]}).round(3).sort_values(by=[("Genre","count")], inplace=False, ascending=False)
+# print(f"Genre_Sales ordered by count [[genre, games_count, sales_sum, mean, median, max, min], [...]]:\n{genre_by_count.reset_index().values.tolist()}.") # convert DataFrame to list of lists for each genre
 genre_by_sales = genre_by_count.sort_values(by=[("Global_Sales","mean")], inplace=False, ascending=False) # mean or median makes the most sense because count varies
-
-# NOTE below is a print statement to help visualize the above data analysis.
-# print(f"<>  PS4: # of games, date range, sales data, best sellers, & genre count:\n\
-#     DataFrame has {df_ps4.shape[0]} rows/games and {df_ps4.shape[1]} columns.\n\
-#     'Year_of_Release' range from {ps4_yr_min} to {ps4_yr_max}.\n\
-#     'Global_Sales' (in millions) range from {ps4_min} to {ps4_max} with an average of {ps4_avg} and median of {ps4_med} and total of {ps4_sum}.\n\
-#     Best Sellers: {best_sellers}.\n\
-#     Genre_Sales ordered by count [[genre, games_count, sales_sum, mean, median, max, min], [...]]:\n{genre_by_count.reset_index().values.tolist()}." # convert DataFrame to list of lists for each genre
-# )
-# Genre Count: {genre_count}.\n\ # removed series, included in dataFrame instead
-# Genre_Sales ordered by count [[genre, games_count, sales_sum, mean, median, max, min], [...]]:\n{genre_by_sales.reset_index().values.tolist()} # convert DataFrame to list of lists for each genre
-
-# # This creates a list of lists [[list,dtype],[],[]]
-# # columns_list = [[column, df[f"{column}"].dtypes] for column in df.columns]
-# print(f"-  The table includes the following columns:\n{df.dtypes}.\n")
-
-# minn = df["Year_of_Release"].min()
-# maxx = df["Year_of_Release"].max()
-# print(f"-  Years tracked range from {minn} to {maxx}.\n")
-
-# avg = df["Global_Sales"].mean().__round__(2)
-# median = df["Global_Sales"].median().__round__(2)
-# minn = df["Global_Sales"].min().__round__(2)
-# maxx = df["Global_Sales"].max().__round__(2)
-# print(f"-  Analysis of Global_Sales Amounts:\nAverage of ${avg}\nMedian of ${median}\nMinimum of ${minn}\nMaximum of ${maxx}\n")
+# print(f"Genre_Sales ordered by count [[genre, games_count, sales_sum, mean, median, max, min], [...]]:\n{genre_by_sales.reset_index().values.tolist()}.") # convert DataFrame to list of lists for each genre
