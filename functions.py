@@ -80,7 +80,8 @@ def aggregator(df, column):
         
         Usage / Example
         ---------------
-            ps4_sum, ps4_min, ps4_max, ps4_avg, ps4_med, ps4_mode = aggregator(df_ps4, "Global_Sales")
+            ps4_sum, _, ps4_max, ps4_avg, _, ps4_mode = aggregator(df_ps4, "Global_Sales")
+            NOTE : values you don't want saved to an object, like min/med in above examples, were ignored by using the underscore character instead of an object name.
     """
     summ = df[column].sum().__round__(3) # Total sales for games on this system
     minn = df[column].min() # Lowest sales for a game on this sytem
