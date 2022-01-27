@@ -17,6 +17,11 @@
 
 This is a project I started to get a better understanding of the amount of games and/or total sales, per recent system, for each genre. After exploring and cleaning this data, I will do some analysis and make use of Python modules to create bar charts which I will display in this repo.
 
+## Tech Stack
+
+* Python
+* Python Libraries: numpy | pandas
+
 ## About the Data
 
 The data set used in this project was created early January 2022 and downloaded as a .csv file from [data.world](https://data.world/sumitrock/video/), which scraped the data from [VGChartz](https://www.vgchartz.com/gamedb/). I have created a [Data Dictionary](#data-dictionary) below, providing info on each column in the data set. And if you would like to know more about [VGChartz Data Collection Methodology](https://www.vgchartz.com/methodology.php), they have a short post about it.
