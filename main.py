@@ -105,3 +105,25 @@ genre_by_count = df_ps4.groupby(["Genre"]).agg({"Genre":"count", "Global_Sales":
 # print(f"Genre_Sales ordered by count [[genre, games_count, sales_sum, mean, median, max, min], [...]]:\n{genre_by_count.reset_index().values.tolist()}.") # convert DataFrame to list of lists for each genre
 genre_by_sales = genre_by_count.sort_values(by=[("Global_Sales","mean")], inplace=False, ascending=False) # mean or median makes the most sense because count varies
 # print(f"Genre_Sales ordered by count [[genre, games_count, sales_sum, mean, median, max, min], [...]]:\n{genre_by_sales.reset_index().values.tolist()}.") # convert DataFrame to list of lists for each genre
+
+
+
+"""CREATING CHARTS"""
+w = 0.2 # width
+x = ["A", "B", "C"] # labels for each set of grouped bars (x1 & x2)
+x1 = [1,2,3] # values for each column label in 1st set of grouped bars
+x2 = [0.75,1.5,2] # values for each column label in 2nd set of grouped bars
+
+bar1 = np.arange(len(x)) # [0,1,2] because length of x is 3
+bar2 = [i+w for i in bar1] # moves each bar over so adjacent with bar1
+# bar3 = [i+w for i in bar2] # moves each bar over so adjacent with bar2
+
+plt.bar(bar1,x1,w,label="x1") # number of bars, height from values, width, bar label used in legend
+plt.bar(bar2,x2,w,label="x2") # number of bars, height from values, width, bar label used in legend
+
+plt.xlabel("X-Axis")
+plt.ylabel("Y-Axis")
+plt.title("Y-Axis vs X-Axis")
+plt.xticks(bar1+w/2,x) # change tick labels from numeric (e.g. 0,1,2) to match labels in list object x AND move ticks to be between both bars
+plt.legend() # generates legend for x1 x2
+plt.show()
