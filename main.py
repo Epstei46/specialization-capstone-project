@@ -1,6 +1,7 @@
 import numpy as np
 import pandas as pd
 import functions as fn
+import matplotlib.pyplot  as plt
 
 df = pd.read_csv('Video_Games.csv') # reading the initial data and storing in a dataFrame
 
