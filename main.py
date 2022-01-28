@@ -117,21 +117,27 @@ genre_by_sales = genre_by_count.sort_values(by=[("Global_Sales","mean")], inplac
 
 
 """CREATING CHARTS"""
-w = 0.2 # width
-x = ["A", "B", "C"] # labels for each set of grouped bars (x1 & x2)
-x1 = [1,2,3] # values for each column label in 1st set of grouped bars
-x2 = [0.75,1.5,2] # values for each column label in 2nd set of grouped bars
+# below converts ps4_genre_counts & xone_genre_counts to a percentage of total games, compared by printing both.
+ps4_genre_counts_pct = [[list[0],round(list[1]/398*100,2)] for list in ps4_genre_counts]
+xone_genre_counts_pct = [[list[0],round(list[1]/253*100,2)] for list in xone_genre_counts]
+# print(ps4_genre_counts_pct)
+# print(xone_genre_counts_pct)
+
+w = 0.3 # width
+x = ["Action", "Role_Playing", "Sports", "Shooter"] # labels for each set of grouped bars (x1 & x2)
+PS4 = [36.43,13.32,11.81,10.55] # values for each column label in 1st set of grouped bars
+Xbox_One = [35.18,5.53,15.02,15.42] # values for each column label in 2nd set of grouped bars
 
 bar1 = np.arange(len(x)) # [0,1,2] because length of x is 3
 bar2 = [i+w for i in bar1] # moves each bar over so adjacent with bar1
 # bar3 = [i+w for i in bar2] # moves each bar over so adjacent with bar2
 
-plt.bar(bar1,x1,w,label="x1") # number of bars, height from values, width, bar label used in legend
-plt.bar(bar2,x2,w,label="x2") # number of bars, height from values, width, bar label used in legend
+plt.bar(bar1,PS4,w,label="PS4") # number of bars, height from values, width, bar label used in legend
+plt.bar(bar2,Xbox_One,w,label="Xbox_One") # number of bars, height from values, width, bar label used in legend
 
-plt.xlabel("X-Axis")
-plt.ylabel("Y-Axis")
-plt.title("Y-Axis vs X-Axis")
+plt.xlabel("Genres")
+plt.ylabel("% of Total Games")
+plt.title("Xbox One vs PS4, % of Games by Genre")
 plt.xticks(bar1+w/2,x) # change tick labels from numeric (e.g. 0,1,2) to match labels in list object x AND move ticks to be between both bars
-plt.legend() # generates legend for x1 x2
-# plt.show()
+plt.legend() # generates legend for each object defined below object x, above object bar1
+plt.show() # makes the created bar chart visible
