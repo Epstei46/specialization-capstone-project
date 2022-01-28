@@ -141,7 +141,7 @@ def incomplete_check(df, clean=False, output=True):
                 elif dtype == 'bool':
                     df[f'{column}'] = df[f'{column}'].fillna(False, inplace=True)
                 elif dtype == 'float64':
-                    df[f'{column}'] = df[f'{column}'].fillna(0, inplace=True)
+                    df[f'{column}'] = df[f'{column}'].fillna(np.nan, inplace=True)
                 else:
                     bad_list.append(f"{column}")
         if output == True and len(bad_list) > 0:

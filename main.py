@@ -19,8 +19,14 @@ del df
 
 
 """DATA CLEANING"""
+# Below function checks for empty values. Can output info and be modified for cleaning.
+# Currently only set up to clean columns with dtype of 'bool' or 'float64'.
 fn.incomplete_check(df_ps4, clean=True, output=False)
 fn.incomplete_check(df_xone, clean=True, output=False)
+
+df_ps4.drop(df_ps4.loc[df_ps4['Year_of_Release']==2017].index, inplace=True) # drop 1 row with 2017 game
+df_ds.drop(df_ds.loc[df_ds['Year_of_Release']==1985].index, inplace=True) # drop 1 row with 1985 game
+df_ds.drop(df_ds.loc[df_ds['Year_of_Release']==2020].index, inplace=True) # drop 1 row with 2020 game
 
 
 
@@ -90,8 +96,8 @@ wii_sum, wii_min, wii_max, wii_avg, wii_med, wii_mode = fn.aggregator(df_wii, "G
 ds_sum, ds_min, ds_max, ds_avg, ds_med, ds_mode = fn.aggregator(df_ds, "Global_Sales")
 psp_sum, psp_min, psp_max, psp_avg, psp_med, psp_mode = fn.aggregator(df_psp, "Global_Sales")
 pc_sum, pc_min, pc_max, pc_avg, pc_med, pc_mode = fn.aggregator(df_pc, "Global_Sales")
-# NOTE  Total Sales for PS4, PC, PSP around #300m; Xbox One total sales at $162m.
-#       Total Sales for PS3, Xbox 360, Wii, DS closer oto 900m
+# NOTE  Total Sales for PS4, PC, PSP around $300m; Xbox One total sales at $162m.
+#       Total Sales for PS3, Xbox 360, Wii, DS closer ot $900m
 aggregate_comparisons = f"<>  Aggregates by system for games sold ($ in millions):\n\
     PS4: Total Sales ${ps4_sum} | Lowest Value ${ps4_min} | Highest Value ${ps4_max} | Average ${ps4_avg} | Median ${ps4_med} | Mode ${ps4_mode.loc[0]}.\n\
     Xbox One: Total Sales ${xone_sum} | Lowest Value ${xone_min} | Highest Value ${xone_max} | Average ${xone_avg} | Median ${xone_med} | Mode ${xone_mode.loc[0]}.\n\
