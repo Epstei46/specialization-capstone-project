@@ -93,7 +93,7 @@ def aggregator(df, column):
     mode = df[column].mode() # Most repeated value for games sales on this system
     return [summ, minn, maxx, avg, med, mode]
 
-def incomplete_check(df, clean=False):
+def incomplete_check(df, clean=False, output=True):
     """
     This function checks for the following values, by column, in each cell: None, NaN, NaT, numpy.NaN, '', numpy.inf. if nulls > 0 in a column, then it will print a statement with the name of the column and number of nulls.
     
@@ -104,7 +104,9 @@ def incomplete_check(df, clean=False):
     df : pandas object
             dataFrame from which to pull the values
     clean : bool, default False
-            if True, try to clean the data. if False, do not change the data.
+            if False, do not change the data. if True, try to clean the data.
+    output : bool, default True
+        if True, output info to Terminal. if False, no output to Terminal.
     
     Returns
     -------
@@ -112,7 +114,7 @@ def incomplete_check(df, clean=False):
     
     Usage / Example
     ---------------
-    fn.incomplete_check(df_ps4, clean=True)\nfn.incomplete_check(df_ps4)
+    fn.incomplete_check(df_ps4, clean=True, output=False)\nfn.incomplete_check(df_ps4)
     """
     bad_list = []
     removed_list = []
@@ -122,7 +124,7 @@ def incomplete_check(df, clean=False):
     
     for column in column_names:
         nulls = df[f"{column}"].isnull().sum()
-        if nulls > 0:
+        if output == True and nulls > 0:
             print(f"The column '{column}' has {nulls} nulls in it. The data type is {df[f'{column}'].dtype}.")
     
     if clean == True:
@@ -142,7 +144,7 @@ def incomplete_check(df, clean=False):
                     df[f'{column}'] = df[f'{column}'].fillna(0, inplace=True)
                 else:
                     bad_list.append(f"{column}")
-        if len(bad_list) > 0:
+        if output == True and len(bad_list) > 0:
             new_rows, new_columns = df.shape
             print(f"<>  Before cleaning, table had {orgnl_rows} rows {orgnl_columns} columns.\n\
     After cleaning, it now has {new_rows} rows {new_columns} columns.\n\

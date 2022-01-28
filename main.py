@@ -19,8 +19,8 @@ del df
 
 
 """DATA CLEANING"""
-fn.incomplete_check(df_ps4, clean=True)
-fn.incomplete_check(df_xone, clean=True)
+fn.incomplete_check(df_ps4, clean=True, output=False)
+fn.incomplete_check(df_xone, clean=True, output=False)
 
 
 
