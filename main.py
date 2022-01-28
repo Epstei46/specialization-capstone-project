@@ -5,10 +5,6 @@ import matplotlib.pyplot  as plt
 
 df = pd.read_csv('Video_Games.csv') # reading the initial data and storing in a dataFrame
 
-"""DATA CLEANING"""
-
-
-
 """CREATE SUBSETS"""
 df_ps4 = df.loc[df['Platform'] == 'PS4']
 df_xone = df.loc[df['Platform'] == 'XOne']
@@ -19,6 +15,12 @@ df_pc = df.loc[df['Platform'] == 'PC']
 df_psp = df.loc[df['Platform'] == 'PSP']
 df_ds = df.loc[df['Platform'] == 'DS']
 del df
+
+
+
+"""DATA CLEANING"""
+fn.incomplete_check(df_ps4, clean=True)
+fn.incomplete_check(df_xone, clean=True)
 
 
 
@@ -126,4 +128,4 @@ plt.ylabel("Y-Axis")
 plt.title("Y-Axis vs X-Axis")
 plt.xticks(bar1+w/2,x) # change tick labels from numeric (e.g. 0,1,2) to match labels in list object x AND move ticks to be between both bars
 plt.legend() # generates legend for x1 x2
-plt.show()
+# plt.show()
