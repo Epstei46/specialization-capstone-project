@@ -150,4 +150,4 @@ def incomplete_check(df, clean=False, output=True):
     After cleaning, it now has {new_rows} rows {new_columns} columns.\n\
     The following columns were removed from the table because most values were NaN: {removed_list}.\n\
     The following columns had dtype=='object', which may be because there were strings, so values were left unchanged, :\n        {bad_list}.")
-    print("") # spacer
+            print("")
