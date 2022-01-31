@@ -13,12 +13,12 @@ df_wii = df.loc[df['Platform'] == 'Wii']
 df_pc = df.loc[df['Platform'] == 'PC']
 df_psp = df.loc[df['Platform'] == 'PSP']
 df_ds = df.loc[df['Platform'] == 'DS']
-del df
+del df # deleting original dataFrame because it is no longer needed
 
 
 
 """DATA CLEANING"""
-# Below function checks for empty values. Can output info and be modified for cleaning.
+# Below function checks for empty values. Can output info and be modified for cleaning
 # Currently only set up to clean columns with dtype of 'bool' or 'float64'.
 fn.incomplete_check(df_ps4, clean=True, output=False)
 fn.incomplete_check(df_xone, clean=True, output=False)
@@ -36,7 +36,7 @@ df_ds.drop(df_ds.loc[df_ds['Year_of_Release']==2020].index, inplace=True) # drop
 columns_list = [[column, df_ps4[f"{column}"].dtypes] for column in df_ps4.columns]
 # print(f"<>  The table includes the following [[columns, data_types], ...] ('O'==Object, likely a string):\n{columns_list}.\n")
 
-genre_count = df_ps4["Genre"].value_counts().reset_index().values.tolist() # Ordered (DESC) count of games in each genre. Converted pandas.Series to list.
+genre_count = df_ps4["Genre"].value_counts().reset_index().values.tolist() # Ordered (DESC) count of games in each genre. Converted pandas.Series to list
 # print(f"Genre Count: {genre_count}.\n")
 
 best_sellers = [name for name in df_ps4.nlargest(5,"Global_Sales")["Name"]] # List of strings, top 5 best sellers
@@ -75,7 +75,7 @@ wii_genre_counts = fn.counter(df_wii, "Genre")
 ds_genre_counts = fn.counter(df_ds, "Genre")
 psp_genre_counts = fn.counter(df_psp, "Genre")
 pc_genre_counts = fn.counter(df_pc, "Genre")
-# NOTE: Xbox One only has 253 games and PS4 has 400 games. All other systems have ~1000 or more games.
+# NOTE: Xbox One only has 253 games and PS4 has 400 games. All other systems have ~1000 or more games
 genre_count_comparisons = f"<>  Genre count by console, most to least:\n\
     PS4 genre counts: {ps4_genre_counts}.\n\
     Xbox One genre counts: {xone_genre_counts}.\n\
@@ -85,7 +85,7 @@ genre_count_comparisons = f"<>  Genre count by console, most to least:\n\
     DS genre counts: {ds_genre_counts}.\n\
     PSP genre counts: {psp_genre_counts}.\n\
     PC genre counts: {pc_genre_counts}\n"
-print(genre_count_comparisons)
+# print(genre_count_comparisons)
 
 ps4_sum, ps4_min, ps4_max, ps4_avg, ps4_med, ps4_mode = fn.aggregator(df_ps4, "Global_Sales")
 xone_sum, xone_min, xone_max, xone_avg, xone_med, xone_mode = fn.aggregator(df_xone, "Global_Sales")
@@ -108,7 +108,7 @@ aggregate_comparisons = f"<>  Aggregates by system for games sold ($ in millions
     PC: Total Sales ${pc_sum} | Lowest Value ${pc_min} | Highest Value ${pc_max} | Average ${pc_avg} | Median ${pc_med} | Mode ${pc_mode.loc[0]}.\n"
 # print(aggregate_comparisons)
 
-genre_by_count = df_ps4.groupby(["Genre"]).agg({"Genre":"count", "Global_Sales":["sum","mean","median","max","min"]}).round(3).sort_values(by=[("Genre","count")], inplace=False, ascending=False)
+genre_by_count = df_xone.groupby(["Genre"]).agg({"Genre":"count", "Global_Sales":["sum","mean","median","max","min"]}).round(3).sort_values(by=[("Genre","count")], inplace=False, ascending=False)
 # print(f"Genre_Sales ordered by count [[genre, games_count, sales_sum, mean, median, max, min], [...]]:\n{genre_by_count.reset_index().values.tolist()}.") # convert DataFrame to list of lists for each genre
 genre_by_sales = genre_by_count.sort_values(by=[("Global_Sales","mean")], inplace=False, ascending=False) # mean or median makes the most sense because count varies
 # print(f"Genre_Sales ordered by mean sales [[genre, games_count, sales_sum, mean, median, max, min], [...]]:\n{genre_by_sales.reset_index().values.tolist()}.") # convert DataFrame to list of lists for each genre
@@ -119,17 +119,21 @@ genre_by_sales = genre_by_count.sort_values(by=[("Global_Sales","mean")], inplac
 # below converts ps4_genre_counts & xone_genre_counts to a percentage of total games, compared by printing both.
 ps4_genre_counts_pct = [[list[0],round(list[1]/398*100,2)] for list in ps4_genre_counts]
 xone_genre_counts_pct = [[list[0],round(list[1]/253*100,2)] for list in xone_genre_counts]
-# print(ps4_genre_counts_pct)
-# print(xone_genre_counts_pct)
+# print(ps4_genre_counts_pct); print(""); print(xone_genre_counts_pct)
 
 # Below fn.plotter() function creates a chart showing Xbox One vs PS4, % of Total Games by Genre. 
-top_genres = ["Action", "Role Playing", "Sports", "Shooter"] # labels for each set of grouped bars (on x-axis)
-PS4 = [36.43,13.32,11.81,10.55] # values for 1st bar in each set of grouped bars
-Xbox_One = [35.18,5.53,15.02,15.42] # values for 2nd bar in each set of grouped bars
-fn.plotter(top_genres, PS4, Xbox_One, "PS4", "Xbox One", "Genres", "% of Total Games", "Xbox One vs PS4, % of Total Games by Genre")
+top_genres = ["Action", "Role Playing", "Sports", "Shooter", "Adventure", "Fighting"] # labels for each set of grouped bars (on x-axis)
+PS4 = [36.43,13.32,11.81,10.55,7.04,4.52] # values for 1st bar in each set of grouped bars
+Xbox_One = [35.18,5.53,15.02,15.42,5.53,2.77] # values for 2nd bar in each set of grouped bars
+# fn.plotter(top_genres, PS4, Xbox_One, "PS4", "Xbox One", "Genres", "% of Total Games", "Xbox One vs PS4, % of Total Games by Genre")
 
 # Below fn.plotter() function creates a chart showing Xbox One vs PS4, # of Games by Genre. 
-top_genres = ["Action", "Role Playing", "Sports", "Shooter", "Adventure", "Fighting"] # labels for each set of grouped bars (on x-axis)
 PS4 = [145,53,47,42,28,18] # values for 1st bar in each set of grouped bars
 Xbox_One = [89,14,38,39,14,7] # values for 2nd bar in each set of grouped bars
 # fn.plotter(top_genres, PS4, Xbox_One, "PS4", "Xbox One", "Genres", "# of Total Games", "Xbox One vs PS4, # of Games by Genre")
+
+# Below fn.plotter() function creates a chart showing Xbox One vs PS4, Mean Sales by Genre.
+top_genres = ["Shooter", "Sports", "Role Playing", "Action", "Racing", "Platform", "Fighting"] 
+PS4 = [2.123,1.196,0.692,0.668,0.64,0.642,0.481] # values for 1st bar in each set of grouped bars
+Xbox_One = [1.565,0.704,0.754,0.434,0.497,0.188,0.344] # values for 2nd bar in each set of grouped bars
+# fn.plotter(top_genres, PS4, Xbox_One, "PS4", "Xbox One", "Genres", "Mean Sales (in millions)", "Xbox One vs PS4, Mean Sales by Genre")
