@@ -15,24 +15,24 @@ def try_or(func, default=None, expected_exc=(Exception,)):
     func : function
         function you would like to try to execute
     expected_exc : default (Exception,)
-        this will catch any exception, or can specify specific exception(s)\n\
+        this will catch any exception, or can specify specific exception(s)\n
             if exception(s) are specified and the actual exception is different, then if a value is specified for default object, it will not be assigned to the object
     
     Returns
     -------
     default : default None
-        if no return expected, this is good.\n\
+        if no return expected, this is good.
             if a return is needed to assign to an object, can set the value to assign to the object if there is an error
     
     Usage / Example
     ---------------
     x =fn.try_or(lambda: "1"/0, default=float('nan'), expected_exc=(ArithmeticError,TypeError))\n\n\
-    print(x)\n\n\
+    print(x)
         output: nan
     
     Source
     ------
-    (1) I was searching online for ways to shorten the try-except <https://stackoverflow.com/a/56137232>
+    (1) I was searching online for ways to shorten the try-except <https://stackoverflow.com/a/56137232>\n\n\
     (2) Also searched for how to catch the line where an error occurred but continue running through the code after that <https://stackoverflow.com/a/47659065>.
     """
     
