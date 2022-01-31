@@ -4,6 +4,44 @@
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot  as plt
+import traceback
+
+def try_or(func, default=None, expected_exc=(Exception,)):
+    """
+    This is a method I built to reduce the amount of try-except needed in my code, with the except returning the error, which then allows the rest of the code after the error to finish running.
+    
+    Parameters
+    ----------
+    func : function
+        function you would like to try to execute
+    expected_exc : default (Exception,)
+        this will catch any exception, or can specify specific exception(s)\n\
+            if exception(s) are specified and the actual exception is different, then if a value is specified for default object, it will not be assigned to the object
+    
+    Returns
+    -------
+    default : default None
+        if no return expected, this is good.\n\
+            if a return is needed to assign to an object, can set the value to assign to the object if there is an error
+    
+    Usage / Example
+    ---------------
+    x =fn.try_or(lambda: "1"/0, default=float('nan'), expected_exc=(ArithmeticError,TypeError))\n\n\
+    print(x)\n\n\
+        output: nan
+    
+    Source
+    ------
+    (1) I was searching online for ways to shorten the try-except <https://stackoverflow.com/a/56137232>
+    (2) Also searched for how to catch the line where an error occurred but continue running through the code after that <https://stackoverflow.com/a/47659065>.
+    """
+    
+    try:
+        return func()
+    except expected_exc:
+        print("-- RAN INTO AN ISSUE HERE! SEE THE ERROR BELOW:")
+        print(traceback.format_exc())
+        return default
 
 def year_range(df, yr_column_name):
     """

@@ -20,8 +20,8 @@ del df # deleting original dataFrame because it is no longer needed
 """DATA CLEANING"""
 # Below function checks for empty values. Can output info and be modified for cleaning
 # Currently only set up to clean columns with dtype of 'bool' or 'float64'.
-fn.incomplete_check(df_ps4, clean=True, output=False)
-fn.incomplete_check(df_xone, clean=True, output=False)
+fn.try_or(lambda: fn.incomplete_check(df_ps4, clean=True, output=False))
+fn.try_or(lambda: fn.incomplete_check(df_xone, clean=True, output=False))
 
 df_ps4.drop(df_ps4.loc[df_ps4['Year_of_Release']==2017].index, inplace=True) # drop 1 row with 2017 game
 df_ds.drop(df_ds.loc[df_ds['Year_of_Release']==1985].index, inplace=True) # drop 1 row with 1985 game
@@ -47,14 +47,14 @@ best_sellers = [name for name in df_ps4.nlargest(5,"Global_Sales")["Name"]] # Li
 
 
 """DATA ANALYSIS"""
-ps4_yr_min, ps4_yr_max = fn.year_range(df_ps4,"Year_of_Release") # 2013-2017
-xone_yr_min, xone_yr_max = fn.year_range(df_xone,"Year_of_Release") # 2013-2016
-ps3_yr_min, ps3_yr_max = fn.year_range(df_ps3,"Year_of_Release") # 2006-2016
-x360_yr_min, x360_yr_max = fn.year_range(df_x360,"Year_of_Release") # 2005-2016
-wii_yr_min, wii_yr_max = fn.year_range(df_wii,"Year_of_Release") # 2006-2016
-ds_yr_min, ds_yr_max = fn.year_range(df_ds,"Year_of_Release") #1985-2020 OR 2004-2016
-psp_yr_min, psp_yr_max = fn.year_range(df_psp,"Year_of_Release") # 2004-2015
-pc_yr_min, pc_yr_max = fn.year_range(df_pc,"Year_of_Release") # 1985-2016
+ps4_yr_min, ps4_yr_max = fn.try_or(lambda: fn.year_range(df_ps4,"Year_of_Release")) # 2013-2017
+xone_yr_min, xone_yr_max = fn.try_or(lambda: fn.year_range(df_xone,"Year_of_Release")) # 2013-2016
+ps3_yr_min, ps3_yr_max = fn.try_or(lambda: fn.year_range(df_ps3,"Year_of_Release")) # 2006-2016
+x360_yr_min, x360_yr_max = fn.try_or(lambda: fn.year_range(df_x360,"Year_of_Release")) # 2005-2016
+wii_yr_min, wii_yr_max = fn.try_or(lambda: fn.year_range(df_wii,"Year_of_Release")) # 2006-2016
+ds_yr_min, ds_yr_max = fn.try_or(lambda: fn.year_range(df_ds,"Year_of_Release")) #1985-2020 OR 2004-2016
+psp_yr_min, psp_yr_max = fn.try_or(lambda: fn.year_range(df_psp,"Year_of_Release")) # 2004-2015
+pc_yr_min, pc_yr_max = fn.try_or(lambda: fn.year_range(df_pc,"Year_of_Release")) # 1985-2016
 # NOTE: Data Cleaning: PS4 (1 game from 2017), DS (1 game from 2020 & 1 game from 1985), PC (has an advantage based on year range for games released)
 year_comparisons = f"<>  Date range by system for games released:\n\
     PS4 'Year_of_Release' range from {ps4_yr_min} to {ps4_yr_max}.\n\
@@ -67,14 +67,14 @@ year_comparisons = f"<>  Date range by system for games released:\n\
     PC 'Year_of_Release' range from {pc_yr_min} to {pc_yr_max}.\n"
 # print(year_comparisons)
 
-ps4_genre_counts = fn.counter(df_ps4, "Genre")
-xone_genre_counts = fn.counter(df_xone, "Genre")
-ps3_genre_counts = fn.counter(df_ps3, "Genre")
-x360_genre_counts = fn.counter(df_x360, "Genre")
-wii_genre_counts = fn.counter(df_wii, "Genre")
-ds_genre_counts = fn.counter(df_ds, "Genre")
-psp_genre_counts = fn.counter(df_psp, "Genre")
-pc_genre_counts = fn.counter(df_pc, "Genre")
+ps4_genre_counts = fn.try_or(lambda: fn.counter(df_ps4, "Genre"))
+xone_genre_counts = fn.try_or(lambda: fn.counter(df_xone, "Genre"))
+ps3_genre_counts = fn.try_or(lambda: fn.counter(df_ps3, "Genre"))
+x360_genre_counts = fn.try_or(lambda: fn.counter(df_x360, "Genre"))
+wii_genre_counts = fn.try_or(lambda: fn.counter(df_wii, "Genre"))
+ds_genre_counts = fn.try_or(lambda: fn.counter(df_ds, "Genre"))
+psp_genre_counts = fn.try_or(lambda: fn.counter(df_psp, "Genre"))
+pc_genre_counts = fn.try_or(lambda: fn.counter(df_pc, "Genre"))
 # NOTE: Xbox One only has 253 games and PS4 has 400 games. All other systems have ~1000 or more games
 genre_count_comparisons = f"<>  Genre count by console, most to least:\n\
     PS4 genre counts: {ps4_genre_counts}.\n\
@@ -87,14 +87,14 @@ genre_count_comparisons = f"<>  Genre count by console, most to least:\n\
     PC genre counts: {pc_genre_counts}\n"
 # print(genre_count_comparisons)
 
-ps4_sum, ps4_min, ps4_max, ps4_avg, ps4_med, ps4_mode = fn.aggregator(df_ps4, "Global_Sales")
-xone_sum, xone_min, xone_max, xone_avg, xone_med, xone_mode = fn.aggregator(df_xone, "Global_Sales")
-ps3_sum, ps3_min, ps3_max, ps3_avg, ps3_med, ps3_mode = fn.aggregator(df_ps3, "Global_Sales")
-x360_sum, x360_min, x360_max, x360_avg, x360_med, x360_mode = fn.aggregator(df_x360, "Global_Sales")
-wii_sum, wii_min, wii_max, wii_avg, wii_med, wii_mode = fn.aggregator(df_wii, "Global_Sales")
-ds_sum, ds_min, ds_max, ds_avg, ds_med, ds_mode = fn.aggregator(df_ds, "Global_Sales")
-psp_sum, psp_min, psp_max, psp_avg, psp_med, psp_mode = fn.aggregator(df_psp, "Global_Sales")
-pc_sum, pc_min, pc_max, pc_avg, pc_med, pc_mode = fn.aggregator(df_pc, "Global_Sales")
+ps4_sum, ps4_min, ps4_max, ps4_avg, ps4_med, ps4_mode = fn.try_or(lambda: fn.aggregator(df_ps4, "Global_Sales"))
+xone_sum, xone_min, xone_max, xone_avg, xone_med, xone_mode = fn.try_or(lambda: fn.aggregator(df_xone, "Global_Sales"))
+ps3_sum, ps3_min, ps3_max, ps3_avg, ps3_med, ps3_mode = fn.try_or(lambda: fn.aggregator(df_ps3, "Global_Sales"))
+x360_sum, x360_min, x360_max, x360_avg, x360_med, x360_mode = fn.try_or(lambda: fn.aggregator(df_x360, "Global_Sales"))
+wii_sum, wii_min, wii_max, wii_avg, wii_med, wii_mode = fn.try_or(lambda: fn.aggregator(df_wii, "Global_Sales"))
+ds_sum, ds_min, ds_max, ds_avg, ds_med, ds_mode = fn.try_or(lambda: fn.aggregator(df_ds, "Global_Sales"))
+psp_sum, psp_min, psp_max, psp_avg, psp_med, psp_mode = fn.try_or(lambda: fn.aggregator(df_psp, "Global_Sales"))
+pc_sum, pc_min, pc_max, pc_avg, pc_med, pc_mode = fn.try_or(lambda: fn.aggregator(df_pc, "Global_Sales"))
 # NOTE  Total Sales for PS4, PC, PSP around $300m; Xbox One total sales at $162m.
 #       Total Sales for PS3, Xbox 360, Wii, DS closer ot $900m
 aggregate_comparisons = f"<>  Aggregates by system for games sold ($ in millions):\n\
@@ -125,15 +125,15 @@ xone_genre_counts_pct = [[list[0],round(list[1]/253*100,2)] for list in xone_gen
 top_genres = ["Action", "Role Playing", "Sports", "Shooter", "Adventure", "Fighting"] # labels for each set of grouped bars (on x-axis)
 PS4 = [36.43,13.32,11.81,10.55,7.04,4.52] # values for 1st bar in each set of grouped bars
 Xbox_One = [35.18,5.53,15.02,15.42,5.53,2.77] # values for 2nd bar in each set of grouped bars
-# fn.plotter(top_genres, PS4, Xbox_One, "PS4", "Xbox One", "Genres", "% of Total Games", "Xbox One vs PS4, % of Total Games by Genre")
+# fn.try_or(lambda: fn.plotter(top_genres, PS4, Xbox_One, "PS4", "Xbox One", "Genres", "% of Total Games", "Xbox One vs PS4, % of Total Games by Genre"))
 
 # Below fn.plotter() function creates a chart showing Xbox One vs PS4, # of Games by Genre. 
 PS4 = [145,53,47,42,28,18] # values for 1st bar in each set of grouped bars
 Xbox_One = [89,14,38,39,14,7] # values for 2nd bar in each set of grouped bars
-# fn.plotter(top_genres, PS4, Xbox_One, "PS4", "Xbox One", "Genres", "# of Total Games", "Xbox One vs PS4, # of Games by Genre")
+# fn.try_or(lambda: fn.plotter(top_genres, PS4, Xbox_One, "PS4", "Xbox One", "Genres", "# of Total Games", "Xbox One vs PS4, # of Games by Genre"))
 
 # Below fn.plotter() function creates a chart showing Xbox One vs PS4, Mean Sales by Genre.
 top_genres = ["Shooter", "Sports", "Role Playing", "Action", "Racing", "Platform", "Fighting"] 
 PS4 = [2.123,1.196,0.692,0.668,0.64,0.642,0.481] # values for 1st bar in each set of grouped bars
 Xbox_One = [1.565,0.704,0.754,0.434,0.497,0.188,0.344] # values for 2nd bar in each set of grouped bars
-# fn.plotter(top_genres, PS4, Xbox_One, "PS4", "Xbox One", "Genres", "Mean Sales (in millions)", "Xbox One vs PS4, Mean Sales by Genre")
+# fn.try_or(lambda: fn.plotter(top_genres, PS4, Xbox_One, "PS4", "Xbox One", "Genres", "Mean Sales (in millions)", "Xbox One vs PS4, Mean Sales by Genre"))
