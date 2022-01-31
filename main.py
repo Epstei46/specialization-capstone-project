@@ -128,3 +128,8 @@ PS4 = [36.43,13.32,11.81,10.55] # values for 1st bar in each set of grouped bars
 Xbox_One = [35.18,5.53,15.02,15.42] # values for 2nd bar in each set of grouped bars
 fn.plotter(top_genres, PS4, Xbox_One, "PS4", "Xbox One", "Genres", "% of Total Games", "Xbox One vs PS4, % of Total Games by Genre")
 
+# Below fn.plotter() function creates a chart showing Xbox One vs PS4, # of Games by Genre. 
+top_genres = ["Action", "Role Playing", "Sports", "Shooter", "Adventure", "Fighting"] # labels for each set of grouped bars (on x-axis)
+PS4 = [145,53,47,42,28,18] # values for 1st bar in each set of grouped bars
+Xbox_One = [89,14,38,39,14,7] # values for 2nd bar in each set of grouped bars
+# fn.plotter(top_genres, PS4, Xbox_One, "PS4", "Xbox One", "Genres", "# of Total Games", "Xbox One vs PS4, # of Games by Genre")
