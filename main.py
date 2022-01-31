@@ -124,11 +124,15 @@ xone_genre_counts_pct = [[list[0],round(list[1]/253*100,2)] for list in xone_gen
 # print(xone_genre_counts_pct)
 
 w = 0.3 # width
-x = ["Action", "Role_Playing", "Sports", "Shooter"] # labels for each set of grouped bars (x1 & x2)
-PS4 = [36.43,13.32,11.81,10.55] # values for each column label in 1st set of grouped bars
-Xbox_One = [35.18,5.53,15.02,15.42] # values for each column label in 2nd set of grouped bars
+def new_func():
+    x = ["Action", "Role_Playing", "Sports", "Shooter"] # labels for each set of grouped bars (on x-axis)
+    PS4 = [36.43,13.32,11.81,10.55] # values for 1st bar in each set of grouped bars
+    Xbox_One = [35.18,5.53,15.02,15.42] # values for 2nd bar in each set of grouped bars
+    return x,PS4,Xbox_One
 
-bar1 = np.arange(len(x)) # [0,1,2] because length of x is 3
+x, PS4, Xbox_One = new_func()
+
+bar1 = np.arange(len(x)) # [0,1,2,3] because length of x is 4
 bar2 = [i+w for i in bar1] # moves each bar over so adjacent with bar1
 # bar3 = [i+w for i in bar2] # moves each bar over so adjacent with bar2
 
@@ -140,4 +144,4 @@ plt.ylabel("% of Total Games")
 plt.title("Xbox One vs PS4, % of Games by Genre")
 plt.xticks(bar1+w/2,x) # change tick labels from numeric (e.g. 0,1,2) to match labels in list object x AND move ticks to be between both bars
 plt.legend() # generates legend for each object defined below object x, above object bar1
-plt.show() # makes the created bar chart visible
+plt.show() # makes the created bar chart visible, pop up on the screen
