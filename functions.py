@@ -3,6 +3,7 @@
 
 import numpy as np
 import pandas as pd
+import matplotlib.pyplot  as plt
 
 def year_range(df, yr_column_name):
     """
@@ -151,3 +152,52 @@ def incomplete_check(df, clean=False, output=True):
     The following columns were removed from the table because most values were NaN: {removed_list}.\n\
     The following columns had dtype=='object', which may be because there were strings, so values were left unchanged, :\n        {bad_list}.")
             print("")
+
+def plotter(x, values1, values2, label1 = "bar1", label2 = "bar2", xlabel = "x-axis", ylabel = "y-axis", title = "title", w = 0.3):
+    """
+    Function used to create a grouped bar chart, 2 bars.\n
+    The number of items in list x & values1 & values2 MUST be the same.
+    
+    Parameters
+    ----------
+    x : list of strings
+        labels for each set of grouped bars (on x-axis)
+    values1 : list of integers / floats
+        values for 1st bar in each set of grouped bars
+    values2 : list of integers / floats
+        values for 2nd bar in each set of grouped bars
+    label1 : string, default "bar1"
+        label for bar1 / values1 which will display in legend
+    label2 : string, default "bar2"
+        label for bar2 / values2 which will display in legend
+    xlabel : string, default "x-axis"
+        label for x-axis on the chart
+    ylabel : string, default "y-axis"
+        label for y-axis on the chart
+    title : string, default "title"
+        label for the chart
+    w : float, default 0.3
+        width of each bar
+
+    Returns
+    -------
+    None
+    
+    Usage / Example
+    ---------------
+    fn.plotter(top_genres, PS4, Xbox_One, "PS4", "Xbox One", "Genres", "% of Total Games", "Xbox One vs PS4, % of Total Games by Genre")
+    """
+    bar1 = np.arange(len(x)) # [0,1,2,3] because length of x is 4
+    bar2 = [i+w for i in bar1] # moves each bar over so adjacent with bar1
+    # bar3 = [i+w for i in bar2] # moves each bar over so adjacent with bar2
+
+    plt.bar(bar1,values1,w,label=f"{label1}") # number of bars, height from values1, width, bar label used in legend
+    plt.bar(bar2,values2,w,label=f"{label2}") # number of bars, height from values2, width, bar label used in legend
+
+    plt.xlabel(f"{xlabel}")
+    plt.ylabel(f"{ylabel}")
+    plt.title(f"{title}")
+    plt.xticks(bar1+w/2,x) # change tick labels from numeric (e.g. 0,1,2) to match labels in list object x AND move ticks to be between both bars
+    plt.legend() # generates legend for each object defined below object x, above object bar1
+    plt.show() # makes the created bar chart visible, pop up on the screen
+

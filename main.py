@@ -1,7 +1,6 @@
 import numpy as np
 import pandas as pd
 import functions as fn
-import matplotlib.pyplot  as plt
 
 df = pd.read_csv('Video_Games.csv') # reading the initial data and storing in a dataFrame
 
@@ -86,7 +85,7 @@ genre_count_comparisons = f"<>  Genre count by console, most to least:\n\
     DS genre counts: {ds_genre_counts}.\n\
     PSP genre counts: {psp_genre_counts}.\n\
     PC genre counts: {pc_genre_counts}\n"
-# print(genre_count_comparisons)
+print(genre_count_comparisons)
 
 ps4_sum, ps4_min, ps4_max, ps4_avg, ps4_med, ps4_mode = fn.aggregator(df_ps4, "Global_Sales")
 xone_sum, xone_min, xone_max, xone_avg, xone_med, xone_mode = fn.aggregator(df_xone, "Global_Sales")
@@ -112,7 +111,7 @@ aggregate_comparisons = f"<>  Aggregates by system for games sold ($ in millions
 genre_by_count = df_ps4.groupby(["Genre"]).agg({"Genre":"count", "Global_Sales":["sum","mean","median","max","min"]}).round(3).sort_values(by=[("Genre","count")], inplace=False, ascending=False)
 # print(f"Genre_Sales ordered by count [[genre, games_count, sales_sum, mean, median, max, min], [...]]:\n{genre_by_count.reset_index().values.tolist()}.") # convert DataFrame to list of lists for each genre
 genre_by_sales = genre_by_count.sort_values(by=[("Global_Sales","mean")], inplace=False, ascending=False) # mean or median makes the most sense because count varies
-# print(f"Genre_Sales ordered by count [[genre, games_count, sales_sum, mean, median, max, min], [...]]:\n{genre_by_sales.reset_index().values.tolist()}.") # convert DataFrame to list of lists for each genre
+# print(f"Genre_Sales ordered by mean sales [[genre, games_count, sales_sum, mean, median, max, min], [...]]:\n{genre_by_sales.reset_index().values.tolist()}.") # convert DataFrame to list of lists for each genre
 
 
 
@@ -123,21 +122,9 @@ xone_genre_counts_pct = [[list[0],round(list[1]/253*100,2)] for list in xone_gen
 # print(ps4_genre_counts_pct)
 # print(xone_genre_counts_pct)
 
-w = 0.3 # width
-x = ["Action", "Role_Playing", "Sports", "Shooter"] # labels for each set of grouped bars (on x-axis)
+# Below fn.plotter() function creates a chart showing Xbox One vs PS4, % of Total Games by Genre. 
+top_genres = ["Action", "Role Playing", "Sports", "Shooter"] # labels for each set of grouped bars (on x-axis)
 PS4 = [36.43,13.32,11.81,10.55] # values for 1st bar in each set of grouped bars
 Xbox_One = [35.18,5.53,15.02,15.42] # values for 2nd bar in each set of grouped bars
+fn.plotter(top_genres, PS4, Xbox_One, "PS4", "Xbox One", "Genres", "% of Total Games", "Xbox One vs PS4, % of Total Games by Genre")
 
-bar1 = np.arange(len(x)) # [0,1,2,3] because length of x is 4
-bar2 = [i+w for i in bar1] # moves each bar over so adjacent with bar1
-# bar3 = [i+w for i in bar2] # moves each bar over so adjacent with bar2
-
-plt.bar(bar1,PS4,w,label="PS4") # number of bars, height from values, width, bar label used in legend
-plt.bar(bar2,Xbox_One,w,label="Xbox_One") # number of bars, height from values, width, bar label used in legend
-
-plt.xlabel("Genres")
-plt.ylabel("% of Total Games")
-plt.title("Xbox One vs PS4, % of Games by Genre")
-plt.xticks(bar1+w/2,x) # change tick labels from numeric (e.g. 0,1,2) to match labels in list object x AND move ticks to be between both bars
-plt.legend() # generates legend for each object defined below object x, above object bar1
-plt.show() # makes the created bar chart visible, pop up on the screen
