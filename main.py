@@ -124,13 +124,9 @@ xone_genre_counts_pct = [[list[0],round(list[1]/253*100,2)] for list in xone_gen
 # print(xone_genre_counts_pct)
 
 w = 0.3 # width
-def new_func():
-    x = ["Action", "Role_Playing", "Sports", "Shooter"] # labels for each set of grouped bars (on x-axis)
-    PS4 = [36.43,13.32,11.81,10.55] # values for 1st bar in each set of grouped bars
-    Xbox_One = [35.18,5.53,15.02,15.42] # values for 2nd bar in each set of grouped bars
-    return x,PS4,Xbox_One
-
-x, PS4, Xbox_One = new_func()
+x = ["Action", "Role_Playing", "Sports", "Shooter"] # labels for each set of grouped bars (on x-axis)
+PS4 = [36.43,13.32,11.81,10.55] # values for 1st bar in each set of grouped bars
+Xbox_One = [35.18,5.53,15.02,15.42] # values for 2nd bar in each set of grouped bars
 
 bar1 = np.arange(len(x)) # [0,1,2,3] because length of x is 4
 bar2 = [i+w for i in bar1] # moves each bar over so adjacent with bar1
