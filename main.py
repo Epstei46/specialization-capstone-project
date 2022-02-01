@@ -39,7 +39,7 @@ df_ds.drop(df_ds.loc[df_ds['Year_of_Release']==2020].index, inplace=True) # drop
 """DATA EXPLORATION"""
 # print(f"DataFrame df_ps4 has {df_ps4.shape[0]} rows/games and {df_ps4.shape[1]} columns.\n")
 
-# This creates a list of lists [[list,dtype],[],[]]
+# This creates a list of lists [[column,dtype],[],[]]
 columns_list = [[column, df_ps4[f"{column}"].dtypes] for column in df_ps4.columns]
 # print(f"<>  The table includes the following [[columns, data_types], ...] ('O'==Object, likely a string):\n{columns_list}.\n")
 
