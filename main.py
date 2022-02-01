@@ -4,7 +4,14 @@ import functions as fn
 
 df = pd.read_csv('Video_Games.csv') # reading the initial data and storing in a dataFrame
 
+# below line is removing the following columns: 4 Publisher, 6 EU_Sales, 7 JP_Sales, 8 Other_Sales, 10 Critic_Score, 11 Critic_Count, 12 User_Score, 13 User_Count, 14 Developer, 15 Rating
+# This can be modified to keep some of those columns or commented out to keep all
+df.drop(df.columns[[4,6,7,8,10,11,12,13,14,15]], axis=1, inplace=True)
+# the following columns will be kept: Name, Platform, Year_of_Release, Genre, NA_Sales, Global_Sales
+
+
 """CREATE SUBSETS"""
+# all below lines are selecting rows where the value in the specified column is == to specified value
 df_ps4 = df.loc[df['Platform'] == 'PS4']
 df_xone = df.loc[df['Platform'] == 'XOne']
 df_ps3 = df.loc[df['Platform'] == 'PS3']
