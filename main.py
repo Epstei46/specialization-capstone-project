@@ -46,7 +46,7 @@ best_sellers = [name for name in df_ps4.nlargest(5,"Global_Sales")["Name"]] # Li
 
 
 
-"""DATA ANALYSIS"""
+"""DATA WRANGLING"""
 ps4_yr_min, ps4_yr_max = fn.try_or(lambda: fn.year_range(df_ps4,"Year_of_Release")) # 2013-2017
 xone_yr_min, xone_yr_max = fn.try_or(lambda: fn.year_range(df_xone,"Year_of_Release")) # 2013-2016
 ps3_yr_min, ps3_yr_max = fn.try_or(lambda: fn.year_range(df_ps3,"Year_of_Release")) # 2006-2016
@@ -86,6 +86,10 @@ genre_count_comparisons = f"<>  Genre count by console, most to least:\n\
     PSP genre counts: {psp_genre_counts}.\n\
     PC genre counts: {pc_genre_counts}\n"
 # print(genre_count_comparisons)
+
+
+
+"""DATA ANALYSIS"""
 
 ps4_sum, ps4_min, ps4_max, ps4_avg, ps4_med, ps4_mode = fn.try_or(lambda: fn.aggregator(df_ps4, "Global_Sales"))
 xone_sum, xone_min, xone_max, xone_avg, xone_med, xone_mode = fn.try_or(lambda: fn.aggregator(df_xone, "Global_Sales"))
