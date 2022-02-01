@@ -126,7 +126,8 @@ genre_by_sales = genre_by_count.sort_values(by=[("Global_Sales","mean")], inplac
 # below converts ps4_genre_counts & xone_genre_counts to a percentage of total games, compared by printing both.
 ps4_genre_counts_pct = [[list[0],round(list[1]/398*100,2)] for list in ps4_genre_counts]
 xone_genre_counts_pct = [[list[0],round(list[1]/253*100,2)] for list in xone_genre_counts]
-# print(ps4_genre_counts_pct); print(""); print(xone_genre_counts_pct)
+# print(f"<>  PS4 Genre % of Total Games: {ps4_genre_counts_pct}")
+# print(f"<>  Xbox One Genre % of Total Games: {xone_genre_counts_pct}")
 
 
 
