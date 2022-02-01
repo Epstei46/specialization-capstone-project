@@ -90,7 +90,6 @@ genre_count_comparisons = f"<>  Genre count by console, most to least:\n\
 
 
 """DATA ANALYSIS"""
-
 ps4_sum, ps4_min, ps4_max, ps4_avg, ps4_med, ps4_mode = fn.try_or(lambda: fn.aggregator(df_ps4, "Global_Sales"))
 xone_sum, xone_min, xone_max, xone_avg, xone_med, xone_mode = fn.try_or(lambda: fn.aggregator(df_xone, "Global_Sales"))
 ps3_sum, ps3_min, ps3_max, ps3_avg, ps3_med, ps3_mode = fn.try_or(lambda: fn.aggregator(df_ps3, "Global_Sales"))
@@ -117,14 +116,14 @@ genre_by_count = df_ps4.groupby(["Genre"]).agg({"Genre":"count", "Global_Sales":
 genre_by_sales = genre_by_count.sort_values(by=[("Global_Sales","mean")], inplace=False, ascending=False) # mean or median makes the most sense because count varies
 # print(f"Genre_Sales ordered by mean sales [[genre, games_count, sales_sum, mean, median, max, min], [...]]:\n{genre_by_sales.reset_index().values.tolist()}.") # convert DataFrame to list of lists for each genre
 
-
-
-"""CREATING CHARTS"""
 # below converts ps4_genre_counts & xone_genre_counts to a percentage of total games, compared by printing both.
 ps4_genre_counts_pct = [[list[0],round(list[1]/398*100,2)] for list in ps4_genre_counts]
 xone_genre_counts_pct = [[list[0],round(list[1]/253*100,2)] for list in xone_genre_counts]
 # print(ps4_genre_counts_pct); print(""); print(xone_genre_counts_pct)
 
+
+
+"""CREATING CHARTS"""
 # Below fn.plotter() function creates a chart showing Xbox One vs PS4, % of Total Games by Genre. 
 top_genres = ["Action", "Role Playing", "Sports", "Shooter", "Adventure", "Fighting"] # labels for each set of grouped bars (on x-axis)
 PS4 = [36.43,13.32,11.81,10.55,7.04,4.52] # values for 1st bar in each set of grouped bars
