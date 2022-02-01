@@ -108,7 +108,7 @@ aggregate_comparisons = f"<>  Aggregates by system for games sold ($ in millions
     PC: Total Sales ${pc_sum} | Lowest Value ${pc_min} | Highest Value ${pc_max} | Average ${pc_avg} | Median ${pc_med} | Mode ${pc_mode.loc[0]}.\n"
 # print(aggregate_comparisons)
 
-genre_by_count = df_xone.groupby(["Genre"]).agg({"Genre":"count", "Global_Sales":["sum","mean","median","max","min"]}).round(3).sort_values(by=[("Genre","count")], inplace=False, ascending=False)
+genre_by_count = df_ps4.groupby(["Genre"]).agg({"Genre":"count", "Global_Sales":["sum","mean","median","max","min"]}).round(3).sort_values(by=[("Genre","count")], inplace=False, ascending=False)
 # print(f"Genre_Sales ordered by count [[genre, games_count, sales_sum, mean, median, max, min], [...]]:\n{genre_by_count.reset_index().values.tolist()}.") # convert DataFrame to list of lists for each genre
 genre_by_sales = genre_by_count.sort_values(by=[("Global_Sales","mean")], inplace=False, ascending=False) # mean or median makes the most sense because count varies
 # print(f"Genre_Sales ordered by mean sales [[genre, games_count, sales_sum, mean, median, max, min], [...]]:\n{genre_by_sales.reset_index().values.tolist()}.") # convert DataFrame to list of lists for each genre
@@ -131,6 +131,12 @@ Xbox_One = [35.18,5.53,15.02,15.42,5.53,2.77] # values for 2nd bar in each set o
 PS4 = [145,53,47,42,28,18] # values for 1st bar in each set of grouped bars
 Xbox_One = [89,14,38,39,14,7] # values for 2nd bar in each set of grouped bars
 # fn.try_or(lambda: fn.plotter(top_genres, PS4, Xbox_One, "PS4", "Xbox One", "Genres", "# of Total Games", "Xbox One vs PS4, # of Games by Genre"))
+
+# Below fn.plotter() function creates a chart showing Xbox One vs PS4, Total Sales by Genre.
+top_genres = ["Shooter", "Sports", "Role Playing", "Action", "Racing", "Platform", "Fighting"] 
+PS4 = [89.17,56.23,36.67,96.8,12.16,7.7,8.65] # values for 1st bar in each set of grouped bars
+Xbox_One = [61.03,26.77,10.55,38.6,10.43,0.94,2.41] # values for 2nd bar in each set of grouped bars
+# fn.try_or(lambda: fn.plotter(top_genres, PS4, Xbox_One, "PS4", "Xbox One", "Genres", "Total Sales (in millions)", "Xbox One vs PS4, Total Sales by Genre"))
 
 # Below fn.plotter() function creates a chart showing Xbox One vs PS4, Mean Sales by Genre.
 top_genres = ["Shooter", "Sports", "Role Playing", "Action", "Racing", "Platform", "Fighting"] 
