@@ -132,24 +132,24 @@ xone_genre_counts_pct = [[list[0],round(list[1]/253*100,2)] for list in xone_gen
 
 
 """CREATING CHARTS"""
-# Below fn.plotter() function creates a chart showing Xbox One vs PS4, % of Total Games by Genre. 
+# Chart showing Xbox One vs PS4, % of Total Games by Genre. 
 top_genres = ["Action", "Role Playing", "Sports", "Shooter", "Adventure", "Fighting"] # labels for each set of grouped bars (on x-axis)
 PS4 = [36.43,13.32,11.81,10.55,7.04,4.52] # values for 1st bar in each set of grouped bars
 Xbox_One = [35.18,5.53,15.02,15.42,5.53,2.77] # values for 2nd bar in each set of grouped bars
 # fn.try_or(lambda: fn.plotter(top_genres, PS4, Xbox_One, "PS4", "Xbox One", "Genres", "% of Total Games", "Xbox One vs PS4, % of Total Games by Genre"))
 
-# Below fn.plotter() function creates a chart showing Xbox One vs PS4, # of Games by Genre. 
+# Chart showing Xbox One vs PS4, # of Games by Genre. 
 PS4 = [145,53,47,42,28,18] # values for 1st bar in each set of grouped bars
 Xbox_One = [89,14,38,39,14,7] # values for 2nd bar in each set of grouped bars
 # fn.try_or(lambda: fn.plotter(top_genres, PS4, Xbox_One, "PS4", "Xbox One", "Genres", "# of Total Games", "Xbox One vs PS4, # of Games by Genre"))
 
-# Below fn.plotter() function creates a chart showing Xbox One vs PS4, Total Sales by Genre.
+# Chart showing Xbox One vs PS4, Total Sales by Genre.
 top_genres = ["Shooter", "Sports", "Role Playing", "Action", "Racing", "Platform", "Fighting"] 
 PS4 = [89.17,56.23,36.67,96.8,12.16,7.7,8.65] # values for 1st bar in each set of grouped bars
 Xbox_One = [61.03,26.77,10.55,38.6,10.43,0.94,2.41] # values for 2nd bar in each set of grouped bars
 # fn.try_or(lambda: fn.plotter(top_genres, PS4, Xbox_One, "PS4", "Xbox One", "Genres", "Total Sales (in millions)", "Xbox One vs PS4, Total Sales by Genre"))
 
-# Below fn.plotter() function creates a chart showing Xbox One vs PS4, Mean Sales by Genre.
+# Chart showing Xbox One vs PS4, Mean Sales by Genre.
 top_genres = ["Shooter", "Sports", "Role Playing", "Action", "Racing", "Platform", "Fighting"] 
 PS4 = [2.123,1.196,0.692,0.668,0.64,0.642,0.481] # values for 1st bar in each set of grouped bars
 Xbox_One = [1.565,0.704,0.754,0.434,0.497,0.188,0.344] # values for 2nd bar in each set of grouped bars
