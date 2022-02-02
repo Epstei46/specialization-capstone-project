@@ -178,9 +178,9 @@ def incomplete_check(df, clean=False, output=True):
                     removed_list.append(f"{column}")
                     df.drop(f"{column}", axis=1, inplace=True)
                 elif dtype == 'bool':
-                    df[f'{column}'] = df[f'{column}'].fillna(False, inplace=True)
+                    df[f'{column}'].fillna(False, inplace=True)
                 elif dtype == 'float64':
-                    df[f'{column}'] = df[f'{column}'].fillna(np.nan, inplace=True)
+                    df[f'{column}'].fillna(np.nan, inplace=True)
                 else:
                     bad_list.append(f"{column}")
         if output == True and len(bad_list) > 0:
