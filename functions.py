@@ -125,11 +125,11 @@ def aggregator(df, column):
         NOTE : values you don't want saved to an object, like min/med in above examples, were ignored by using the underscore character instead of an object name.
     """
     summ = df[column].sum().__round__(3) # Total sales for games on this system
-    minn = df[column].min() # Lowest sales for a game on this sytem
-    maxx = df[column].max() # Highest sales for a game on this system
+    minn = df[column].min().__round__(3) # Lowest sales for a game on this sytem
+    maxx = df[column].max().__round__(3) # Highest sales for a game on this system
     avg = df[column].mean().__round__(3) # Average sales for games on this system
-    med = df[column].median() # Median sales for games on this sytem
-    mode = df[column].mode() # Most repeated value for games sales on this system
+    med = df[column].median().__round__(3) # Median sales for games on this sytem
+    mode = df[column].mode().__round__(3) # Most repeated value for games sales on this system
     return [summ, minn, maxx, avg, med, mode]
 
 def incomplete_check(df, clean=False, output=True):
