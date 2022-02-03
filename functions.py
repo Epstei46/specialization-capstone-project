@@ -223,7 +223,7 @@ def plotter(x, values1, values2, label1 = "bar1", label2 = "bar2", xlabel = "x-a
     
     Usage / Example
     ---------------
-    fn.plotter(top_genres, PS4, Xbox_One, "PS4", "Xbox One", "Genres", "% of Total Games", "Xbox One vs PS4, % of Total Games by Genre")
+    fn.plotter(top_genres, PS4, Xbox_One, "PS4", "Xbox One", "Genres", "% of Total Games", "Chart Title")
     """
     bar1 = np.arange(len(x)) # [0,1,2,3] because length of x is 4
     bar2 = [i+w for i in bar1] # moves each bar over so adjacent with bar1
